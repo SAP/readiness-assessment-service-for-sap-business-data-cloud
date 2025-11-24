@@ -1,0 +1,41 @@
+select 'RSDDSTAT_OLAP' as "TABLE", OBJNAME as "KEY", VARCHAR(max(STARTTIME)) as "DATE", VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSDDSTAT_OLAP group by OBJNAME
+union
+select 'RSANT_PROCESSR' as "TABLE", PROCESS as "KEY", VARCHAR(max(START_TIME)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSANT_PROCESSR group by "PROCESS"
+union
+select 'RSMDATASTATE' as "TABLE", INFOCUBE, VARCHAR(max(TMSTMP_QUALOK)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSMDATASTATE group by "INFOCUBE"
+union
+select 'RSBKREQUEST' as "TABLE", SRC, VARCHAR(max(TSTMP_START)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSBKREQUEST group by "SRC"
+union
+select 'RSBKREQUEST1' as "TABLE", DTP, VARCHAR(max(TSTMP_START)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSBKREQUEST group by "DTP"
+union
+select 'RSBKREQUEST2' as "TABLE", TGT, VARCHAR(max(TSTMP_START)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSBKREQUEST group by "TGT"
+union
+select 'RSDMSTAT' as "TABLE", ICNAME, VARCHAR(max(TSTPDAT)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSDMSTAT group by "ICNAME"
+union
+select 'RSRD_SETTING' as "TABLE", SETTING_ID, VARCHAR(max(LASTUSED)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSRD_SETTING group by "SETTING_ID"
+union
+select 'RSBREQUID' as "TABLE", INFOSPOKE, VARCHAR(max(TSTMP_START)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSBREQUID group by "INFOSPOKE"
+union
+select 'RSSELDONE1' as "TABLE", LOGSYS, VARCHAR(max(SELDATE)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSSELDONE group by "LOGSYS"
+union
+select 'RSLDPIO1' as "TABLE", LOGSYS, VARCHAR(max(TIMESTAMP)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSLDPIO group by "LOGSYS" 
+union
+select 'RSDAARCHREQ_V' as "TABLE", DAPNAME, VARCHAR(max(TIMESTAMP_LONG)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSDAARCHREQ_V group by "DAPNAME"
+union
+select 'RSREQDONE' as "TABLE", LOGDPID, VARCHAR(max(DATUM)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSREQDONE group by "LOGDPID"
+union
+select 'RSREQDONE1' as "TABLE", LOGGRID, VARCHAR(max(DATUM)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSREQDONE group by "LOGGRID"
+union
+select 'RSPCLOGCHAIN' as "TABLE", CHAIN_ID, VARCHAR(max(DATUM)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSPCLOGCHAIN group by "CHAIN_ID"
+union
+select 'ROOSPRMSC' as "TABLE", OLTPSOURCE as "KEY", VARCHAR(max(TIMESTAMP)), VARCHAR(RLOGSYS) as "COL1", VARCHAR(SLOGSYS) as "COL2" from ROOSPRMSC group by "OLTPSOURCE", "RLOGSYS", "SLOGSYS"
+union
+select 'RSRREPDIR' as "TABLE", INFOCUBE, VARCHAR(max(GENTIME)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSRREPDIR group by "INFOCUBE"
+union
+select 'V_REP_JOIN' as "TABLE", INFOCUBE, VARCHAR(max(LASTUSED)), VARCHAR(coalesce(NULL, '')) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from V_REP_JOIN group by "INFOCUBE"
+union
+select 'RSSELDONE' as "TABLE", OLTPSOURCE as "KEY", VARCHAR(max(SELDATE)), VARCHAR(LOGSYS) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSSELDONE group by "OLTPSOURCE", "LOGSYS"
+union
+select 'RSLDPIO' as "TABLE", OLTPSOURCE as "KEY", VARCHAR(max(TIMESTAMP)), VARCHAR(LOGSYS) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSLDPIO group by "OLTPSOURCE", "LOGSYS" 
+union
+select 'RSPCPROCESSLOG' as "TABLE", TYPE as "KEY", VARCHAR(max(STARTTIMESTAMP)), VARCHAR(VARIANTE) as "COL1", VARCHAR(coalesce(NULL, '')) as "COL2" from RSPCPROCESSLOG group by "TYPE", "VARIANTE"

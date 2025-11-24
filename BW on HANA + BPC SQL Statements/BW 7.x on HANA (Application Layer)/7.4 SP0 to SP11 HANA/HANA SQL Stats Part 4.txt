@@ -1,0 +1,7 @@
+select 'RSREQDONE', LOGDPID, CAST(max(DATUM) as varchar), '', '' from "RSREQDONE" group by LOGDPID
+union
+select 'RSREQDONE1', LOGGRID, CAST(max(DATUM) as varchar), '', '' from "RSREQDONE" group by LOGGRID
+union
+select 'RSPCLOGCHAIN', CHAIN_ID, CAST(max(DATUM) as varchar), '', '' from "RSPCLOGCHAIN" group by CHAIN_ID
+union
+select 'ROOSPRMSC', OLTPSOURCE, CAST(max(TIMESTAMP) as varchar), RLOGSYS, SLOGSYS from "ROOSPRMSC" group by OLTPSOURCE, RLOGSYS, SLOGSYS

@@ -1,0 +1,19 @@
+select 'RSPMPROCESS', UNIQUE_TARGET_DTA, CAST(max(PROCESS_TSN) as varchar), '', '' from "RSPMPROCESS" group by UNIQUE_TARGET_DTA
+union
+select 'RSBKREQUEST', SRC, CAST(max(TSTMP_START) as varchar), '', '' from "RSBKREQUEST" group by SRC
+union
+select 'RSBKREQUEST1', DTP, CAST(max(TSTMP_START) as varchar), '', '' from "RSBKREQUEST" group by DTP
+union
+select 'RSBKREQUEST2', TGT, CAST(max(TSTMP_START) as varchar), '', '' from "RSBKREQUEST" group by TGT
+union
+select 'RSDMSTAT', ICNAME, CAST(max(TSTPDAT) as varchar), '', '' from "RSDMSTAT" group by ICNAME
+union
+select 'RSRD_SETTING', SETTING_ID, CAST(max(LASTUSED) as varchar), '', '' from "RSRD_SETTING" group by SETTING_ID
+union
+select 'RSBREQUID', INFOSPOKE, CAST(max(TSTMP_START) as varchar), '', '' from "RSBREQUID" group by INFOSPOKE
+union
+select 'RSDHARUN', HAAPNM, CAST(max(START_TIME) as varchar), '', '' from "RSDHARUN" group by HAAPNM
+union
+select 'RSSELDONE', OLTPSOURCE, CAST(max(SELDATE) as varchar), LOGSYS, '' from "RSSELDONE" group by OLTPSOURCE, LOGSYS
+union
+select 'RSSELDONE1', LOGSYS, CAST(max(SELDATE) as varchar), '', '' from "RSSELDONE" group by LOGSYS

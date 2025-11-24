@@ -1,0 +1,80 @@
+select 'BPC_STD_ENV' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  '' as MULTIPROV,  '' AS BEX_SEC, '' AS SRV_TYPE, '' as PER_YTD , ''  from "UJA_APPSET_INFO"
+union
+select 'BPC_STD_APP' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , INFOCUBE , '' as DIMENSION ,  MULTIPROV ,  BEXVCUBE ,  APPLICATION_TYPE ,  STORAGE_TYPE , ''  from "UJA_APPL"
+union
+select 'BPC_STD_DIM' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , '' as INFOCUBE , DIMENSION ,  SECURE  ,  '' , '' , '' , ''  from "UJA_DIM_APPL"
+union
+select 'BPC_STD_PAC' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APP_ID as MODEL , '' as INFOCUBE , '' as DIMENSION ,  GROUP_ID ,  to_char(count(PACKAGE_ID)) ,  ''  , '' , ''  from "UJD_PACKAGES2"
+group by APPSET_ID, APP_ID, GROUP_ID 
+union
+select 'BPC_STD_FOR' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , '' as INFOCUBE , '' as DIMENSION ,  '' ,  STORAGE_TYPE  , '' , '' , ''  from "UJA_FORMULA_APP"
+union
+select 'BPC_STD_XLT' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'XLT'
+group by APPSET
+union
+select 'BPC_STD_XLTX' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'XLTX'
+group by APPSET
+union
+select 'BPC_STD_XLTM' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'XLTM'
+group by APPSET
+union
+select 'BPC_STD_XLS' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'XLS'
+group by APPSET
+union
+select 'BPC_STD_XLSX' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'XLSX'
+group by APPSET
+union
+select 'BPC_STD_XLSM' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'XLSM'
+group by APPSET
+union
+select 'BPC_STD_PPT' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'PPT'
+group by APPSET
+union
+select 'BPC_STD_LGF' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'LGF'
+group by APPSET
+union
+select 'BPC_STD_LGX' as TLOGO , APPSET as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  TO_CHAR(COUNT(DOCNAME)) ,  '' , '' , '' , ''  from "UJF_DOC" where DOCTYPE = 'LGX'
+group by APPSET
+union
+select 'BPC_STD_RUL' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , DIMENSION ,  RULE_NUM  ,  '' , '' , '' , ''  from "UJV_RULES"
+union
+select 'BPC_STD_LOG' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , DIMENSION ,  RULE_NUM ,  to_char(count(LOG_OPR)) ,  to_char(count(LOG_MEM)) , '' , ''  from "UJV_RULE_LOGIC"
+group by APPSET_ID, DIMENSION, RULE_NUM
+union
+select 'BPC_STD_CTR' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , '' as INFOCUBE , '' as DIMENSION ,  to_char(count(CONTROL_ID))  ,  '' , '' , '' , ''  from "UJCTRL_CONTROL"
+group by APPSET_ID, APPLICATION_ID
+union
+select 'BPC_STD_JRN' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPL_ID as MODEL , '' as INFOCUBE , '' as DIMENSION ,  JRN_TMPL_ID ,  to_char(count(JRN_ID))  , '' , '' , ''  from "UJJ_JRNL"
+group by APPSET_ID, APPL_ID, JRN_TMPL_ID
+union
+select distinct 'BPC_STD_ELM' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , '' as INFOCUBE , '' as DIMENSION ,  ELIM_ID ,  to_char(count(SEQ))  , '' , '' , ''  from "UJP_ELIM"
+group by APPSET_ID, APPLICATION_ID, ELIM_ID
+union
+select 'BPC_STD_ICB' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , '' as INFOCUBE , '' as DIMENSION ,  MATCHING_ID ,  to_char(SEQ)  , '' , '' , ''  from "UJP_ICBOOK"
+union
+select 'BPC_EMB_ENVM' as TLOGO , '' as ENVIRONMENT ,  'A' ,  APPSET_ID , '' as MODEL , '' as INFOCUBE , '' as DIMENSION , '' ,  '' , '' , '' , ''  from "RSBPCA_APPSET" where OBJVERS = 'A'
+union
+select 'BPC_EMB_AGG' as TLOGO , '' as ENVIRONMENT ,  'A' , '' as INFOAREA , AGGRLEVEL , INFOPROV , '' as DIMENSION , '' ,  '' , '' , '' , ''  from "RSPLS_ALVL" where OBJVERS = 'A'
+union
+select 'BPC_EMB_REL' as TLOGO , '' as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , INFOPROV , '' as DIMENSION , '' ,  '' , '' , '' , ''  from "RSPLS_CR_HEAD" where OBJVERS = 'A'
+union
+select 'BPC_EMB_AGI' as TLOGO , '' as ENVIRONMENT ,  'A' , '' as INFOAREA , AGGRLEVEL , INFOPROV , IOBJNM , '' ,  '' , '' , '' , ''  from "RSPLS_ALVL_IOBJ" where OBJVERS = 'A'
+union
+select 'BPC_EMB_PLF' as TLOGO , '' as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , INFOPROV , '' as DIMENSION , SRVNM ,  SRVTYPENM , '' , '' , ''  from "RSPLF_SRV" where OBJVERS = 'A'
+union
+select 'BPC_EMB_PLE' as TLOGO , '' as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' , '' as DIMENSION , SRVTYPENM , CLASSNM , '' , '' , ''  from "RSPLF_SRVTYPE" where OBJVERS = 'A'
+union
+select 'BPC_EMB_FUN' as TLOGO , '' as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION , FUNCNAME ,  '' , '' , '' , ''  from "RSPLF_FDIR"
+union
+select 'BPC_EMB_PLSQ' as TLOGO , '' as ENVIRONMENT ,  'A' ,  SEQNM , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  CONTREL ,  '' , '' , '' , ''  from "RSPLS_SEQUENCE" where OBJVERS = 'A'
+union
+select 'BPC_EMB_PLDS' as TLOGO , '' as ENVIRONMENT ,  'A' ,  INFOPROV , '' as MODEL ,  INFOPROV , '' as DIMENSION ,  CONTREL ,  '' , '' , '' , ''  from "RSPLS_DS_HEAD" where OBJVERS = 'A' AND ACTIVFL = 'X'
+union
+select 'BPC_EMB_PLCR' as TLOGO , '' as ENVIRONMENT ,  'A' ,  INFOPROV , '' as MODEL ,  INFOPROV , '' as DIMENSION ,  CONTREL ,  '' , '' , '' , ''  from "RSPLS_CR_HEAD" where OBJVERS = 'A' AND ACTIVFL = 'X'
+union
+select 'BPC_EMB_BBPF' as TLOGO , '' as ENVIRONMENT ,  'A' ,  TMPL_ID , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  CONTREL ,  '' , '' , '' , ''  from "RSBPCB_TEMPLATE" where OBJVERS = 'A' AND ACTIVFL = 'X'
+union
+select 'BPC_EMB_BDAP' as TLOGO , '' as ENVIRONMENT ,  'A' ,  PROFILE_ID , '' as MODEL , '' as INFOCUBE , '' as DIMENSION , '' ,  '' , '' , '' , ''  from "RSBPCE_DAP_TEAM" where OBJVERS = 'A'
+union
+select distinct 'BPC_EMB_QUE' as TLOGO, '' as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , INFOCUBE, '' as DIMENSION , to_char(count(COMPID)) ,  '' , '' , '' , ''  from RSRREPDIR where objvers = 'A' and IS_PLANQUERY = 'X'
+group by INFOCUBE

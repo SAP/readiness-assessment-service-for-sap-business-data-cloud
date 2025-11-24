@@ -1,0 +1,49 @@
+select 'RSDDSTAT_OLAP' as "TABLE", OBJNAME as "KEY", CAST(max(STARTTIME) as varchar2(20)) as "DATE", '' as "COL1", '' as "COL2" from RSDDSTAT_OLAP group by "OBJNAME"
+union
+select 'RSANT_PROCESSR', PROCESS, CAST(max(START_TIME) as varchar2(20)), '', '' from RSANT_PROCESSR group by "PROCESS"
+union
+select 'RSMDATASTATE', INFOCUBE, CAST(max(TMSTMP_QUALOK) as varchar2(20)), '', '' from RSMDATASTATE group by "INFOCUBE"
+union
+select 'RSPMXREFPROCVIEW', TGT_DATATARGET, CAST(max(TGT_REQUEST_TSN) as varchar2(20)), '', '' from RSPMXREFPROCVIEW group by "TGT_DATATARGET"
+union
+select 'RSPMXREFPROCVIEW1', PROCESS_ID, CAST(max(TGT_REQUEST_TSN) as varchar2(20)), '', '' from RSPMXREFPROCVIEW group by "PROCESS_ID"
+union
+select 'RSPMPROCESS', UNIQUE_TARGET_DTA, CAST(max(PROCESS_TSN) as varchar2(20)), '', '' from RSPMPROCESS group by "UNIQUE_TARGET_DTA"
+union
+select 'RSBKREQUEST', SRC, CAST(max(TSTMP_START) as varchar2(20)), '', '' from RSBKREQUEST group by "SRC"
+union
+select 'RSBKREQUEST1', DTP, CAST(max(TSTMP_START) as varchar2(20)), '', '' from RSBKREQUEST group by "DTP"
+union
+select 'RSBKREQUEST2', TGT, CAST(max(TSTMP_START) as varchar2(20)), '', '' from RSBKREQUEST group by "TGT"
+union
+select 'RSDMSTAT', ICNAME, CAST(max(TSTPDAT) as varchar2(20)), '', '' from RSDMSTAT group by "ICNAME"
+union
+select 'RSRD_SETTING', SETTING_ID, CAST(max(LASTUSED) as varchar2(20)), '', '' from RSRD_SETTING group by "SETTING_ID"
+union
+select 'RSBREQUID', INFOSPOKE, CAST(max(TSTMP_START) as varchar2(20)), '', '' from RSBREQUID group by "INFOSPOKE"
+union
+select 'RSDHARUN', HAAPNM, CAST(max(START_TIME) as varchar2(20)), '', '' from RSDHARUN group by "HAAPNM"
+union
+select 'RSSELDONE', OLTPSOURCE, CAST(max(SELDATE) as varchar2(20)), LOGSYS, '' from RSSELDONE group by "OLTPSOURCE", "LOGSYS"
+union
+select 'RSSELDONE1', LOGSYS, CAST(max(SELDATE) as varchar2(20)), '', '' from RSSELDONE group by "LOGSYS"
+union
+select 'RSLDPIO', OLTPSOURCE, CAST(max(TIMESTAMP) as varchar2(20)), LOGSYS, '' from RSLDPIO group by "OLTPSOURCE", "LOGSYS" 
+union
+select 'RSLDPIO1', LOGSYS, CAST(max(TIMESTAMP) as varchar2(20)), '', '' from RSLDPIO group by "LOGSYS" 
+union
+select 'RSDAARCHREQ_V', DAPNAME, CAST(max(TIMESTAMP_LONG) as varchar2(20)), '', '' from RSDAARCHREQ_V group by "DAPNAME"
+union
+select 'RSREQDONE', LOGDPID, CAST(max(DATUM) as varchar2(20)), '', '' from RSREQDONE group by "LOGDPID"
+union
+select 'RSREQDONE1', LOGGRID, CAST(max(DATUM) as varchar2(20)), '', '' from RSREQDONE group by "LOGGRID"
+union
+select 'RSPCLOGCHAIN', CHAIN_ID, CAST(max(DATUM) as varchar2(20)), '', '' from RSPCLOGCHAIN group by "CHAIN_ID"
+union
+select 'ROOSPRMSC', OLTPSOURCE, CAST(max(TIMESTAMP) as varchar2(20)), RLOGSYS, SLOGSYS from ROOSPRMSC group by "OLTPSOURCE", "RLOGSYS", "SLOGSYS"
+union
+select 'RSPCPROCESSLOG', TYPE, CAST(max(STARTTIMESTAMP) as varchar2(20)), VARIANTE, '' from RSPCPROCESSLOG group by "TYPE", "VARIANTE"
+union
+select 'RSRREPDIR', INFOCUBE, CAST(max(GENTIME) as varchar2(20)) as GENTIME, '', '' from RSRREPDIR group by "INFOCUBE"
+union
+select 'V_REP_JOIN', INFOCUBE, CAST(max(LASTUSED) as varchar2(20)), '', '' from V_REP_JOIN group by "INFOCUBE"

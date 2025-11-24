@@ -1,0 +1,126 @@
+select 'DBV: ' || version as TLOGO, '' as OBJECT, '' as OBJVERS, '' as ATTRIBUTE1, '' as ATTRIBUTE2, '' as ATTRIBUTE3, '' as ATTRIBUTE4, '' as ATTRIBUTE5, '' as ATTRIBUTE6 from m_database
+union
+select 'ADSO' as TLOGO, ADSONM as OBJECT, OBJVERS, PLANNING_MODE as ATTRIBUTE1, HANAMODELFL as ATTRIBUTE2, DIRECT_UPDATE as ATTRIBUTE3, NCUMTIM as ATTRIBUTE4, '' as ATTRIBUTE5, '' as ATTRIBUTE6 from "RSOADSO" where OBJVERS = 'A'
+union
+select 'ODSO' as TLOGO, ODSOBJECT, OBJVERS, PLANNING_MODE, ODSOTYPE, IMOFL, HANAMODELFL, NCUMTIM, '' from "RSDODSO" where OBJVERS = 'A'
+union
+select 'CUBE' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, INFOAREA from "RSDCUBE" where OBJVERS = 'A' and CUBETYPE = 'B'
+union
+select 'MPRO' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, INFOAREA from "RSDCUBE" where OBJVERS = 'A' and CUBETYPE = 'M'
+union
+select 'VIRT' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, '' from "RSDCUBE" where OBJVERS = 'A' and CUBETYPE = 'V'
+union
+select 'HYBR' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, '' from "RSDCUBE" where OBJVERS = 'A' and CUBETYPE = 'H'
+union
+select 'ISET' as TLOGO, INFOSET, OBJVERS, HANAMODELFL, '', '', '', '', '' from "RSQISET" where OBJVERS = 'A'
+union
+select 'IOBC' as TLOGO, INFOOBJCAT, OBJVERS, IOBJTP, INFOAREA, '', '', '', '' from "RSDIOBC" where OBJVERS = 'A'
+union
+select 'IOBJ' as TLOGO, IOBJNM, OBJVERS, IOBJTP, '', '', '', '', '' from "RSDIOBJ" where OBJVERS = 'A'
+union
+select 'IOBR' as TLOGO, CHABASNM, OBJVERS, ATTRINM, '', '', '', '', '' from "RSDBCHATR" where OBJVERS = 'A'
+union
+select 'IOBK' as TLOGO, KYFNM, OBJVERS, KYFTP, AGGRGEN, '', '', '', '' from "RSDKYF" where OBJVERS = 'A'
+union
+select 'IOBB' as TLOGO, CHABASNM, OBJVERS, RDAFL, CHATP, MDRCLNM, CONVEXIT, IOBJ_HANAMODEL, '' from "RSDCHABAS" where OBJVERS = 'A'
+union
+select 'LPOA' as TLOGO, LPO, OBJVERS, MSTR_TLOGO, MSTR_OBJNM, MSTR_TEMPLATE, '', '', '' from "RSLPO" where OBJVERS = 'A'
+union
+select 'ALVL' as TLOGO, AGGRLEVEL, OBJVERS, INFOPROV, '', '', '', '', '' from "RSPLS_ALVL" where OBJVERS = 'A'
+union
+select 'ARCH' as TLOGO, DAPNAME, OBJVERS, TLOGO, OBJNM, ARCHMODE, '', '', '' from "RSDADAP" where OBJVERS = 'A'
+union
+select 'AINX' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from "RSLTIP" where OBJVERS = 'A' and TLOGO = 'AINX'
+union
+select 'COPR' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from "RSLTIP" where OBJVERS = 'A' and TLOGO = 'COPR'
+union
+select 'HCPR' as TLOGO, HCPRNM, OBJVERS, HANAMODELFL, '', '', '', '', INFOAREA from "RSOHCPR" where OBJVERS = 'A'
+union
+select 'FBPA' as TLOGO, FBPNAME, OBJVERS, '', '', '', '', '', '' from "RSFBP" where OBJVERS = 'A'
+union
+select 'CALC' as TLOGO, OBJNM, OBJVERS, NAMESPACE, OBJECT_NAME, '', '', '', '' from "RSOOBJXREF_HANA" where OBJVERS = 'A'
+union
+select 'HAAP' as TLOGO, HAAPNM as OBJECT, OBJVERS, INFOAREA, '', '', '', '', '' from "RSDHAMAP" where OBJVERS = 'A'and ORIGIN_TYPE = ''
+union
+select 'RSDS' as TLOGO, DATASOURCE, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSDS" where OBJVERS = 'A'
+union
+select 'ISFS' as TLOGO, OLTPSOURCE as OBJECT, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSOLTPSOURCE" where OBJVERS = 'A'
+union
+select 'DTPA' as TLOGO, DTP as OBJECT, OBJVERS, DTPTYPE, SRCTLOGO, SRC, TGTTLOGO, TGT, '' from "RSBKDTP" where OBJVERS = 'A'
+union
+select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
+union
+select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, STARTROUTINE || '|' || ENDROUTINE || '|' || EXPERT , '' from "RSTRAN" where OBJVERS = 'A'
+union
+select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
+union
+select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, OLTPSOURCE, LOGSYS, '', '', '', '' from "RSLDPIO" where OBJVERS = 'A'
+union
+select 'LSYS' as TLOGO, SLOGSYS as OBJECT, OBJSTAT, RLOGSYS, SRCTYPE, SAPREL, SBWBCRL, RBWBCRL, '' from "RSBASIDOC" where OBJSTAT = 'ACT'
+union
+select 'ROOS' as TLOGO, OLTPSOURCE as OBJECT, '' , RLOGSYS, SLOGSYS, '', '', '', '' from "ROOSGEN"
+union
+select 'DEST' as TLOGO, a.OHDEST as OBJECT, a.OBJVERS , a.DESTTYPE, b.DBTAB, b.GENKEY, '', '', '' from "RSBOHDEST" a
+left outer join "RSBDBTAB" b
+on a.OHDEST = b.OHDEST and a.OBJVERS = b.OBJVERS where a.OBJVERS = 'A'
+union
+select 'RSPC' as TLOGO, CHAIN_ID as OBJECT, OBJVERS , '', '', '', '', '', '' from "RSPCCHAIN" group by CHAIN_ID, OBJVERS having OBJVERS = 'A'
+union
+select 'RSPV' as TLOGO, TYPE as OBJECT, OBJVERS , VARIANTE, '', '', '', '', '' from "RSPCVARIANTATTR" where OBJVERS = 'A'
+union
+select 'ANPR' as TLOGO, PROCESS as OBJECT, OBJVERS , '', '', '', '', '', '' from "RSANT_PROCESS" where OBJVERS = 'A'
+union
+select 'SPOK' as TLOGO, INFOSPOKE as OBJECT, OBJVERS , '', '', '', '', '', '' from "RSBSPOKE" where OBJVERS = 'A'
+union
+select 'CTRT' as TLOGO, CTTNM as OBJECT, OBJVERS, DATIOBJNM, TCURIOBJNM, SCURIOBJNM, RATEIOBJNM, '', '' from "RSCURTRT" where OBJVERS = 'A'
+union
+select 'ELEM' as TLOGO, COMPUID as OBJECT, OBJVERS, INFOCUBE, COMPTYPE, CAST( VERSION as varchar), CAST( LASTUSED as varchar), COMPID, '' from "V_REP_JOIN" where OBJVERS = 'A'
+union
+select 'RRQI' as TLOGO, INFOCUBE as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSBBSCUBEDIR" where OBJVERS = 'A'
+union
+select 'RRQA' as TLOGO, ELTUID as OBJECT, OBJVERS, INFOCUBE, '', '', '', '', '' from "RSBBSQUERYDIR" where OBJVERS = 'A'
+union
+select 'UOMT' as TLOGO, UOMNM as OBJECT, OBJVERS, FAKTORIOBJNM, '', '', '', '', '' from "RSUOMTRT" where OBJVERS = 'A'
+union
+select 'TMPL' as TLOGO, TMPLID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSZWTEMPLATE" where OBJVERS = 'A'
+union
+select 'BTMP' as TLOGO, OBJID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSZWBTMPHEAD" where OBJVERS = 'A'
+union
+select 'BRSE' as TLOGO, SETTING_ID as OBJECT, OBJVERS, OBJECT_ID, CAST( LASTUSED as varchar), '', '', '', '' from "RSRD_SETTING" where OBJVERS = 'A'
+union
+select 'RASE' as TLOGO, SETTINGNM as OBJECT, OBJVERS, '',  '', '', '', '', '' from "RSRA_SETTING" where OBJVERS = 'A'
+union
+select 'RSEQ' as TLOGO, INFOPROVIDER as OBJECT, '', QUERY, WEBSERVICE, WEBSERVICEDESCR, '', '', '' from "RSEQ_DIR"
+union
+select 'AZAP' as TLOGO, TECHNAME as OBJECT, OBJVERS, OBJTYPE, FILETYPE, '', '', '', '' from "RSAOOBJ" where OBJVERS = 'A' and FILETYPE = 'biapp'
+union
+select 'XLWB' as TLOGO, a.WORKBOOKID as OBJECT, a.OBJVERS , a.WBTYP, b.TITLE, '', '', '', '' from "RSRWBINDEX" a
+left outer join (select TITLE, WORKBOOKID, OBJVERS, LANGU from "RSRWBINDEXT" where OBJVERS = 'A' and LANGU = 'E') b
+on a.WORKBOOKID = b.WORKBOOKID where a.OBJVERS = 'A'
+union
+select 'XCLS' as TLOGO, TECHNAME as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSXCLSHEAD" where OBJVERS = 'A'
+union
+select 'CVER' as TLOGO, COMPONENT as OBJECT, '', RELEASE, EXTRELEASE, COMP_TYPE, '', '', '' from "CVERS"
+union
+select 'BPCA' as TLOGO, INFOCUBE as OBJECT, 'A', APPSET_ID, APPLICATION_ID, MULTIPROV, BEXVCUBE, '', '' from "UJA_APPL"
+union
+select 'BPCE' as TLOGO, b.INFOPROV as OBJECT, a.OBJVERS, a.APPSET_ID, a.APPL_ID, b.INFOAREA, '', '', '' from "RSBPCA_APPL" a
+left outer join "RSBPCA_APPL_IPRV" b
+on a.APPSET_ID = b.APPSET_ID and a.APPL_ID = b.APPL_ID where a.OBJVERS = 'A' and b.OBJVERS = 'A'
+union
+select 'SIZE' as TLOGO, NAMESPACE as OBJECT, '', NSPACEGEN, '', '', '', '', '' from "RSPSPACE"
+union
+select 'RSTO' as TLOGO, ODSNAME as OBJECT, '', ODSNAME_TECH, USERAPP, USEROBJ, '', '', '' from "RSTSODS" where "USEROBJ" = ''
+union
+select 'DAMT' as TLOGO, a.SLOGSYS, '', a.RLOGSYS, '', '', '', '', '' from "RSBASIDOC" a
+left outer join "T000" b
+on a.SLOGSYS = b.LOGSYS
+where b.LOGSYS <> '' and a.OBJSTAT = 'ACT'
+union
+select 'DTMP' as TLOGO, INFOCUBE, '', PARTCUBE, '', '', '', '', '' from "RSDCUBEMULTI"  
+where OBJVERS = 'A' 
+union
+Select 'DTHC' as TLOGO, OBJNM, '', OBJNM_DEP, TLOGO_DEP, '', '', '', '' from "RSOOBJXREF" where TLOGO = 'HCPR' 
+and OBJVERS = 'A' and (TLOGO_DEP != 'IOBJ' and TLOGO_DEP != 'AREA') and ASC_TYPE = '002'
+union
+Select 'DTIT' as TLOGO, INFOSET, '', TNAME, '', '', '', '', '' from "RSQTOBJ" where OBJVERS = 'A'

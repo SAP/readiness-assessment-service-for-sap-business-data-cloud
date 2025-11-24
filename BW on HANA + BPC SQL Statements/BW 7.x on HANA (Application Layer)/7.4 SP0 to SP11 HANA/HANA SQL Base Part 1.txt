@@ -1,0 +1,11 @@
+select 'DBV: ' || version as TLOGO, '' as OBJECT, '' as OBJVERS, '' as ATTRIBUTE1, '' as ATTRIBUTE2, '' as ATTRIBUTE3, '' as ATTRIBUTE4, '' as ATTRIBUTE5, '' as ATTRIBUTE6 from m_database
+union
+select 'IOBC' as TLOGO, INFOOBJCAT, OBJVERS, IOBJTP, INFOAREA, '', '', '', '' from "RSDIOBC" where OBJVERS = 'A'
+union
+select 'IOBJ' as TLOGO, IOBJNM, OBJVERS, IOBJTP, '', '', '', '', '' from "RSDIOBJ" where OBJVERS = 'A'
+union
+select 'IOBR' as TLOGO, CHABASNM, OBJVERS, ATTRINM, '', '', '', '', '' from "RSDBCHATR" where OBJVERS = 'A'
+union
+select 'IOBK' as TLOGO, KYFNM, OBJVERS, KYFTP, AGGRGEN, '', '', '', '' from "RSDKYF" where OBJVERS = 'A'
+union
+select 'IOBB' as TLOGO, CHABASNM, OBJVERS, RDAFL, CHATP, MDRCLNM, CONVEXIT, IOBJ_HANAMODEL, '' from "RSDCHABAS" where OBJVERS = 'A'

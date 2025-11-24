@@ -1,0 +1,5 @@
+select 'RSPCPROCESSLOG', TYPE, CAST(max(STARTTIMESTAMP) as varchar), VARIANTE, '' from "RSPCPROCESSLOG" group by TYPE, VARIANTE
+union
+select 'RSRREPDIR', INFOCUBE, CAST(max(GENTIME) as varchar) as GENTIME, '', '' from "RSRREPDIR" group by INFOCUBE
+union
+select 'V_REP_JOIN', INFOCUBE, CAST(max(LASTUSED) as varchar), '', '' from "V_REP_JOIN" group by INFOCUBE

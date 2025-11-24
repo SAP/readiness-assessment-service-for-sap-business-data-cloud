@@ -1,0 +1,5 @@
+select 'RSLDPIO', OLTPSOURCE, CAST(max(TIMESTAMP) as varchar), LOGSYS, '' from "RSLDPIO" group by OLTPSOURCE, LOGSYS 
+union
+select 'RSLDPIO1', LOGSYS, CAST(max(TIMESTAMP) as varchar), '', '' from "RSLDPIO" group by LOGSYS 
+union
+select 'RSDAARCHREQ_V', DAPNAME, CAST(max(TIMESTAMP_LONG) as varchar), '', '' from "RSDAARCHREQ_V" group by DAPNAME
