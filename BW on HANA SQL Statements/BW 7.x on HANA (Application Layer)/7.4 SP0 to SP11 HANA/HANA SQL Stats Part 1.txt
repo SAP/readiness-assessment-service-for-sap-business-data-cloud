@@ -1,9 +1,0 @@
-select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, max(STARTTIME) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
-union
-select 'RSANT_PROCESSR', PROCESS, CAST(max(START_TIME) as varchar), '', '' from "RSANT_PROCESSR" group by PROCESS
-union
-select 'RSMDATASTATE', INFOCUBE, CAST(max(TMSTMP_QUALOK) as varchar), '', '' from "RSMDATASTATE" group by INFOCUBE
-union
-select 'RSPMXREFPROCVIEW', TGT_DATATARGET, CAST(max(TGT_REQUEST_TSN) as varchar), '', '' from "RSPMXREFPROCVIEW" group by TGT_DATATARGET
-union
-select 'RSPMXREFPROCVIEW1', PROCESS_ID, CAST(max(TGT_REQUEST_TSN) as varchar), '', '' from "RSPMXREFPROCVIEW" group by PROCESS_ID

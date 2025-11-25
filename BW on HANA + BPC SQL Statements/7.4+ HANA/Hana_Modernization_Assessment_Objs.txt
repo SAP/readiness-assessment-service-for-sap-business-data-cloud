@@ -1,0 +1,177 @@
+SELECT 'analyticview' AS ID, OBJECT_NAME AS NAME, PACKAGE_ID AS ATTRIBUTE1, '' ATTRIBUTE2
+from "_SYS_REPO"."ACTIVE_OBJECT" Where object_suffix ='analyticview'
+UNION ALL 
+SELECT 'attribute_view' AS object_suffix, OBJECT_NAME, PACKAGE_ID, '' 
+from "_SYS_REPO"."ACTIVE_OBJECT" Where object_suffix ='attributeview'
+UNION ALL 
+SELECT 'calculation_view' AS object_suffix, OBJECT_NAME, PACKAGE_ID, ''
+from "_SYS_REPO"."ACTIVE_OBJECT" Where object_suffix ='calculationview'
+UNION ALL 
+Select 'index_CPBTREE_UNIQUE', INDEX_NAME, SCHEMA_NAME, TABLE_NAME
+FROM "SYS"."INDEXES"  where INDEX_TYPE ='CPBTREE UNIQUE'
+UNION ALL 
+Select 'index_BTREE_UNIQUE', INDEX_NAME, SCHEMA_NAME, TABLE_NAME
+FROM "SYS"."INDEXES"  where INDEX_TYPE ='BTREE UNIQUE'
+UNION ALL 
+Select 'index_CPBTREE', INDEX_NAME, SCHEMA_NAME, TABLE_NAME
+FROM "SYS"."INDEXES"  where INDEX_TYPE ='CPBTREE'
+UNION ALL 
+Select 'index_INVERTED_VALUE', INDEX_NAME, SCHEMA_NAME, TABLE_NAME
+FROM "SYS"."INDEXES"  where INDEX_TYPE ='INVERTED VALUE '
+UNION ALL 
+Select 'index_INVERTED_INDIVIDUAL', INDEX_NAME, SCHEMA_NAME, TABLE_NAME
+FROM "SYS"."INDEXES"  where INDEX_TYPE ='INVERTED INDIVIDUAL'
+union all
+Select 'index_NON-UNUIQUE_INVERTED_HASH_INDEX', INDEX_NAME, SCHEMA_NAME, TABLE_NAME
+FROM "SYS"."INDEXES"  where INDEX_TYPE ='NON-UNIQUE INVERTED HASH INDEX'
+UNION ALL
+select 'procedure_standard_call', PROCEDURE_NAME,SCHEMA_NAME,'' from "SYS"."PROCEDURES" where DEFINITION not like'%with result view%'
+Union all
+select 'procedure_call_with_result_view', PROCEDURE_NAME,SCHEMA_NAME,'' from "SYS"."PROCEDURES" where DEFINITION like '%with result view%'
+Union all
+select 'column_table',table_name,schema_name,'' from "SYS"."TABLES" where IS_SYSTEM_TABLE = 'FALSE' and TABLE_TYPE ='COLUMN'
+Union all
+select 'row_table',table_name,schema_name,'' from "SYS"."TABLES" where IS_SYSTEM_TABLE = 'FALSE' and TABLE_TYPE ='ROW'
+union all
+select 'temporal_table', table_name,schema_name,'' from "SYS"."TABLES" where IS_SYSTEM_TABLE = 'FALSE' and temporal_type ='TEMPORAL'
+Union all
+select 'series_table', table_name,schema_name,'' from "SYS"."TABLES" where IS_SYSTEM_TABLE = 'FALSE' and is_series_table = true
+Union all
+select 'flexible_table', table_name,schema_name,''  from "SYS"."FLEXIBLE_TABLES" 
+Union all
+select 'table_has_schema_flexibility', table_name,schema_name,'' from "SYS"."TABLES" where IS_SYSTEM_TABLE = 'FALSE' and HAS_SCHEMA_FLEXIBILITY = 'TRUE'
+Union all 
+select distinct 'm_cs_partition', "TABLE_NAME",schema_name, '' FROM "TABLE_PARTITIONS"
+Union all
+select 'sequence', object_name,schema_name,'' from "OBJECTS" where "SCHEMA_NAME" not in ('SYS', 'SYSTEM') and "OBJECT_TYPE" ='SEQUENCE'
+Union all
+select 'function',  object_name,schema_name,''  from "OBJECTS" where "SCHEMA_NAME" not in ('SYS', 'SYSTEM') and "OBJECT_TYPE" ='FUNCTION'
+Union all
+select 'synonym',  object_name,schema_name,''  from "OBJECTS" where "SCHEMA_NAME" not in ('SYS', 'SYSTEM') and "OBJECT_TYPE" ='SYNONYM'
+Union all
+select 'schema',  schema_name,schema_name,''  from "OBJECTS" where "SCHEMA_NAME" not in ('SYS', 'SYSTEM') and "OBJECT_TYPE" ='SCHEMA' union all
+select 'trigger',  object_name,schema_name,''  from "OBJECTS" where "SCHEMA_NAME" not in ('SYS', 'SYSTEM') and "OBJECT_TYPE" ='TRIGGER'
+Union all
+select distinct 'xml_analytical_privilege',OBJECT_NAME,'','' FROM "SYS"."GRANTED_PRIVILEGES" where  OBJECT_TYPE ='ANALYTICALPRIVILEGE'
+Union all
+select 'CE_RIGHT_OUTER_JOIN', PROCEDURE_NAME,SCHEMA_NAME,'' from procedures where locate(definition,'CE_RIGHT_OUTER_JOIN') <> 0 
+Union all
+select 'CE_LEFT_OUTER_JOIN',PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_LEFT_OUTER_JOIN') <> 0 
+Union all
+select 'CE_JOIN_VIEW', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_JOIN_VIEW') <> 0 
+Union all
+select 'CE_OLAP_VIEW', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_OLAP_VIEW') <> 0 
+Union all
+select 'CE_CALC_VIEW', PROCEDURE_NAME,SCHEMA_NAME,'' from procedures where locate(definition,'CE_CALC_VIEW') <> 0 
+Union all
+select 'CE_AGGREGATION', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_AGGREGATION') <> 0 
+Union all
+select 'CE_JOIN', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_JOIN(') <> 0 
+Union all
+select 'CE_PROJECTION', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_PROJECTION') <> 0 
+Union all
+select 'CE_UNION_ALL', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_UNION_ALL') <> 0 
+Union all
+select 'CE_VERTICAL_UNION', PROCEDURE_NAME,SCHEMA_NAME,''  from procedures where locate(definition,'CE_VERTICAL_UNION') <> 0 
+Union all
+select 'flowgraph', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbflowgraph'
+Union all
+select 'odata', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='xsodata'
+Union all
+select 'xsapp',OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='xsapp'
+Union all
+select 'procedures_with_overview',PROCEDURE_NAME,SCHEMA_NAME,''  from PROCEDURES where locate(definition,'WITH OVERVIEW') <> 0 
+Union all
+select 'procedures_with_version_validation', PROCEDURE_NAME,SCHEMA_NAME,''  from PROCEDURES where locate(definition,'WITH VERSION VALIDATION') <> 0 
+Union all
+select distinct 'dynamic_tiering_tables', TABLE_NAME,SCHEMA_NAME,'' FROM SYS.M_ES_TABLES
+union all
+Select 'index_FULL_TEXT',  INDEX_NAME, SCHEMA_NAME, TABLE_NAME FROM "SYS"."INDEXES"  where INDEX_TYPE ='GEOCODE'
+Union all
+Select 'index_GEOCODE',  INDEX_NAME, SCHEMA_NAME, TABLE_NAME FROM "SYS"."INDEXES"  where INDEX_TYPE ='FULLTEXT'
+union all
+select 'aflpmml', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='aflpmml'
+Union all
+select 'dataflow', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='dataflow'
+Union all
+select 'epmmodel', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='epmmodel'
+Union all
+select 'epmquerysource', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='epmquerysource'
+Union all
+select 'halmscenario',OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='halmscenario'
+Union all
+select 'hdbdd', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbdd'
+Union all
+select 'hdbflowgraphtemplate', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbflowgraphtemplate'
+Union all
+select 'hdbruldec', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbruldec'
+Union all
+select 'hdbschema', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbschema'
+Union all
+select 'hdbstructure', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbstructure'
+Union all
+select 'hdbtextbundle',OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextbundle'
+Union all
+select 'hdbti', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbti'
+Union all
+select 'hdbtid', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtid'
+Union all
+select 'hdbtim', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtim'
+Union all
+select 'pvscenario', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='pvscenario'
+Union all
+select 'hdbviewcache', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbviewcache'
+Union all
+select 'hdbafllangprocedure', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbafllangprocedure'
+Union all
+select 'hdbcds', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbcds'
+Union all
+select 'hdbsysbicsynonym', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbsysbicsynonym'
+Union all
+select 'hdbmrjob', OBJECT_NAME,PACKAGE_ID,''  from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbmrjob'
+Union all
+select 'jar', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='jar'
+Union all
+select 'hdbfulltextindex', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbfulltextindex'
+Union all
+select 'hdbtextconfig', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextconfig'
+Union all
+select 'hdbtextdict', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextdict'
+Union all
+select 'hdbtextrule', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextrule'
+Union all
+select 'hdbtextinclude', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextinclude'
+Union all
+select 'hdbtextlexicon', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextlexicon'
+Union all
+select 'hdbtextminingconfig', OBJECT_NAME,PACKAGE_ID,'' from "_SYS_REPO"."ACTIVE_OBJECT" where OBJECT_SUFFIX ='hdbtextminingconfig'
+union all
+select 'abapodbc', a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME 
+from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME  from SYS.VIRTUAL_TABLES
+) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+where b.ADAPTER_NAME ='abapodbc'
+Union all
+select 'aseodbc',a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME  from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME ='aseodbc'
+Union all
+select 'iqodbc', a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME ='iqodbc'
+Union all
+select 'hanaodbc', a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME  from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME ='hanaodbc'
+Union all
+select 'FileAdapter', a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME  from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME ='FileAdapter'
+Union all
+select 'bigqueryrest', a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME  from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME ='bigqueryrest'
+Union all
+select 'athena', a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME  from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME ='athena'
+Union all
+select 'unsupported_adapters_'||ADAPTER_NAME, a.REMOTE_SOURCE_NAME as NAME, SCHEMA_NAME ,TABLE_NAME  from (select distinct SCHEMA_NAME, TABLE_NAME, REMOTE_SOURCE_NAME from SYS.VIRTUAL_TABLES) a inner join (select * from SYS.REMOTE_SOURCES) b on a.REMOTE_SOURCE_NAME = b.REMOTE_SOURCE_NAME
+													where b.ADAPTER_NAME not in ('athena', 'bigqueryrest', 'FileAdapter', 'hanaodbc','iqodbc','aseodbc','abapodbc')
+union all 
+SELECT DISTINCT 'user_roles',ROLE_NAME,ROLE_SCHEMA_NAME,'' FROM "SYS"."GRANTED_ROLES" 
+union all
+select 'users', to_varchar(count(distinct USER_NAME)),'','' from "SYS"."USERS" where user_deactivated = 'FALSE'
