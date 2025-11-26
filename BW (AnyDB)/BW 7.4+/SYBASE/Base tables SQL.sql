@@ -1,0 +1,124 @@
+select 'ADSO' as TLOGO, ADSONM as OBJECT, OBJVERS, PLANNING_MODE as ATTRIBUTE1, HANAMODELFL as ATTRIBUTE2, DIRECT_UPDATE as ATTRIBUTE3, NCUMTIM as ATTRIBUTE4, '' as ATTRIBUTE5, '' as ATTRIBUTE6 from <SID>.<OWNER_SCHEMA>.RSOADSO where OBJVERS = 'A'
+union
+select 'ODSO' as TLOGO, ODSOBJECT, OBJVERS, PLANNING_MODE, ODSOTYPE, IMOFL, HANAMODELFL, NCUMTIM, '' from <SID>.<OWNER_SCHEMA>.RSDODSO where OBJVERS = 'A'
+union
+select 'CUBE' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, INFOAREA from <SID>.<OWNER_SCHEMA>.RSDCUBE where OBJVERS = 'A' and CUBETYPE = 'B'
+union
+select 'MPRO' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, INFOAREA from <SID>.<OWNER_SCHEMA>.RSDCUBE where OBJVERS = 'A' and CUBETYPE = 'M'
+union
+select 'VIRT' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, '' from <SID>.<OWNER_SCHEMA>.RSDCUBE where OBJVERS = 'A' and CUBETYPE = 'V'
+union
+select 'HYBR' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, '' from <SID>.<OWNER_SCHEMA>.RSDCUBE where OBJVERS = 'A' and CUBETYPE = 'H'
+union
+select 'ISET' as TLOGO, INFOSET, OBJVERS, HANAMODELFL, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSQISET where OBJVERS = 'A'
+union
+select 'IOBC' as TLOGO, INFOOBJCAT, OBJVERS, IOBJTP, INFOAREA, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDIOBC where OBJVERS = 'A'
+union
+select 'IOBJ' as TLOGO, IOBJNM, OBJVERS, IOBJTP, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDIOBJ where OBJVERS = 'A'
+union
+select 'IOBR' as TLOGO, CHABASNM, OBJVERS, ATTRINM, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDBCHATR where OBJVERS = 'A'
+union
+select 'IOBK' as TLOGO, KYFNM, OBJVERS, KYFTP, AGGRGEN, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDKYF where OBJVERS = 'A'
+union
+select 'IOBB' as TLOGO, CHABASNM, OBJVERS, RDAFL, CHATP, MDRCLNM, CONVEXIT, IOBJ_HANAMODEL, '' from <SID>.<OWNER_SCHEMA>.RSDCHABAS where OBJVERS = 'A'
+union
+select 'LPOA' as TLOGO, LPO, OBJVERS, MSTR_TLOGO, MSTR_OBJNM, MSTR_TEMPLATE, '', '', '' from <SID>.<OWNER_SCHEMA>.RSLPO where OBJVERS = 'A'
+union
+select 'ALVL' as TLOGO, AGGRLEVEL, OBJVERS, INFOPROV, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSPLS_ALVL where OBJVERS = 'A'
+union
+select 'ARCH' as TLOGO, DAPNAME, OBJVERS, TLOGO, OBJNM, ARCHMODE, '', '', '' from <SID>.<OWNER_SCHEMA>.RSDADAP where OBJVERS = 'A'
+union
+select 'AINX' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSLTIP where OBJVERS = 'A' and TLOGO = 'AINX'
+union
+select 'COPR' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSLTIP where OBJVERS = 'A' and TLOGO = 'COPR'
+union
+select 'HCPR' as TLOGO, HCPRNM, OBJVERS, HANAMODELFL, '', '', '', '', INFOAREA from <SID>.<OWNER_SCHEMA>.RSOHCPR where OBJVERS = 'A'
+union
+select 'FBPA' as TLOGO, FBPNAME, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSFBP where OBJVERS = 'A'
+union
+select 'CALC' as TLOGO, OBJNM, OBJVERS, NAMESPACE, OBJECT_NAME, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSOOBJXREF_HANA where OBJVERS = 'A'
+union
+select 'HAAP' as TLOGO, HAAPNM as OBJECT, OBJVERS, INFOAREA, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDHAMAP where OBJVERS = 'A'and ORIGIN_TYPE = ''
+union
+select 'RSDS' as TLOGO, DATASOURCE, OBJVERS, LOGSYS, TYPE, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDS where OBJVERS = 'A'
+union
+select 'ISFS' as TLOGO, OLTPSOURCE as OBJECT, OBJVERS, LOGSYS, TYPE, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSOLTPSOURCE where OBJVERS = 'A'
+union
+select 'DTPA' as TLOGO, DTP as OBJECT, OBJVERS, DTPTYPE, SRCTLOGO, SRC, TGTTLOGO, TGT, '' from <SID>.<OWNER_SCHEMA>.RSBKDTP where OBJVERS = 'A'
+union
+select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSLGRHIE where OBJVERS = 'A'
+union
+select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, STARTROUTINE || '|' || ENDROUTINE || '|' || EXPERT , '' from <SID>.<OWNER_SCHEMA>.RSTRAN where OBJVERS = 'A'
+union
+select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSLGRHIE where OBJVERS = 'A'
+union
+select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, OLTPSOURCE, LOGSYS, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSLDPIO where OBJVERS = 'A'
+union
+select 'LSYS' as TLOGO, SLOGSYS as OBJECT, OBJSTAT, RLOGSYS, SRCTYPE, SAPREL, SBWBCRL, RBWBCRL, '' from <SID>.<OWNER_SCHEMA>.RSBASIDOC where OBJSTAT = 'ACT'
+union
+select 'ROOS' as TLOGO, OLTPSOURCE as OBJECT, '' , RLOGSYS, SLOGSYS, '', '', '', '' from <SID>.<OWNER_SCHEMA>.ROOSGEN
+union
+select 'DEST' as TLOGO, a.OHDEST as OBJECT, a.OBJVERS , a.DESTTYPE, b.DBTAB, b.GENKEY, '', '', '' from <SID>.<OWNER_SCHEMA>.RSBOHDEST a
+left outer join <SID>.<OWNER_SCHEMA>.RSBDBTAB b
+on a.OHDEST = b.OHDEST and a.OBJVERS = b.OBJVERS where a.OBJVERS = 'A'
+union
+select 'RSPC' as TLOGO, CHAIN_ID as OBJECT, OBJVERS , '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSPCCHAIN where OBJVERS = 'A'
+union
+select 'RSPV' as TLOGO, TYPE as OBJECT, OBJVERS , VARIANTE, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSPCVARIANTATTR where OBJVERS = 'A'
+union
+select 'ANPR' as TLOGO, PROCESS as OBJECT, OBJVERS , '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSANT_PROCESS where OBJVERS = 'A'
+union
+select 'SPOK' as TLOGO, INFOSPOKE as OBJECT, OBJVERS , '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSBSPOKE where OBJVERS = 'A'
+union
+select 'CTRT' as TLOGO, CTTNM as OBJECT, OBJVERS, DATIOBJNM, TCURIOBJNM, SCURIOBJNM, RATEIOBJNM, '', '' from <SID>.<OWNER_SCHEMA>.RSCURTRT where OBJVERS = 'A'
+union
+select 'ELEM' as TLOGO, COMPUID as OBJECT, OBJVERS, INFOCUBE, COMPTYPE, CAST( VERSION as varchar(10)), CAST( LASTUSED as varchar(20)), COMPID, '' from <SID>.<OWNER_SCHEMA>.V_REP_JOIN where OBJVERS = 'A'
+union
+select 'RRQI' as TLOGO, INFOCUBE as OBJECT, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSBBSCUBEDIR where OBJVERS = 'A'
+union
+select 'RRQA' as TLOGO, ELTUID as OBJECT, OBJVERS, INFOCUBE, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSBBSQUERYDIR where OBJVERS = 'A'
+union
+select 'UOMT' as TLOGO, UOMNM as OBJECT, OBJVERS, FAKTORIOBJNM, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSUOMTRT where OBJVERS = 'A'
+union
+select 'TMPL' as TLOGO, TMPLID as OBJECT, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSZWTEMPLATE where OBJVERS = 'A'
+union
+select 'BTMP' as TLOGO, OBJID as OBJECT, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSZWBTMPHEAD where OBJVERS = 'A'
+union
+select 'BRSE' as TLOGO, SETTING_ID as OBJECT, OBJVERS, OBJECT_ID, CAST( LASTUSED as varchar(20)), '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSRD_SETTING where OBJVERS = 'A'
+union
+select 'RASE' as TLOGO, SETTINGNM as OBJECT, OBJVERS, '',  '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSRA_SETTING where OBJVERS = 'A'
+union
+select 'RSEQ' as TLOGO, INFOPROVIDER as OBJECT, '', QUERY, WEBSERVICE, WEBSERVICEDESCR, '', '', '' from <SID>.<OWNER_SCHEMA>.RSEQ_DIR
+union
+select 'AZAP' as TLOGO, TECHNAME as OBJECT, OBJVERS, OBJTYPE, FILETYPE, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSAOOBJ where OBJVERS = 'A' and FILETYPE = 'biapp'
+union
+select 'XLWB' as TLOGO, a.WORKBOOKID as OBJECT, a.OBJVERS , a.WBTYP, b.TITLE, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSRWBINDEX a
+left outer join (select TITLE, WORKBOOKID, OBJVERS, LANGU from <SID>.<OWNER_SCHEMA>.RSRWBINDEXT where OBJVERS = 'A' and LANGU = 'E') b
+on a.WORKBOOKID = b.WORKBOOKID where a.OBJVERS = 'A'
+union
+select 'XCLS' as TLOGO, TECHNAME as OBJECT, OBJVERS, '', '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSXCLSHEAD where OBJVERS = 'A'
+union
+select 'CVER' as TLOGO, COMPONENT as OBJECT, '', RELEASE, EXTRELEASE, COMP_TYPE, '', '', '' from <SID>.<OWNER_SCHEMA>.CVERS
+union
+select 'BPCA' as TLOGO, INFOCUBE as OBJECT, 'A', APPSET_ID, APPLICATION_ID, MULTIPROV, BEXVCUBE, '', '' from <SID>.<OWNER_SCHEMA>.UJA_APPL
+union
+select 'BPCE' as TLOGO, b.INFOPROV as OBJECT, a.OBJVERS, a.APPSET_ID, a.APPL_ID, b.INFOAREA, '', '', '' from <SID>.<OWNER_SCHEMA>.RSBPCA_APPL a
+left outer join <SID>.<OWNER_SCHEMA>.RSBPCA_APPL_IPRV b
+on a.APPSET_ID = b.APPSET_ID and a.APPL_ID = b.APPL_ID where a.OBJVERS = 'A' and b.OBJVERS = 'A'
+union
+select 'SIZE' as TLOGO, NAMESPACE as OBJECT, '', NSPACEGEN, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSPSPACE
+union
+select 'RSTO' as TLOGO, ODSNAME as OBJECT, '', ODSNAME_TECH, USERAPP, USEROBJ, '', '', '' from <SID>.<OWNER_SCHEMA>.RSTSODS where USEROBJ = ''
+union
+select 'DAMT' as TLOGO, a.SLOGSYS, '', a.RLOGSYS, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSBASIDOC a
+left outer join <SID>.<OWNER_SCHEMA>.T000 b
+on a.SLOGSYS = b.LOGSYS
+where b.LOGSYS <> '' and a.OBJSTAT = 'ACT'
+union
+select 'DTMP' as TLOGO, INFOCUBE, '', PARTCUBE, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSDCUBEMULTI  
+where OBJVERS = 'A' 
+union
+Select 'DTHC' as TLOGO, OBJNM, '', OBJNM_DEP, TLOGO_DEP, '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSOOBJXREF where TLOGO = 'HCPR' 
+and OBJVERS = 'A' and (TLOGO_DEP != 'IOBJ' and TLOGO_DEP != 'AREA') and ASC_TYPE = '002'
+union
+Select 'DTIT' as TLOGO, INFOSET, '', TNAME, '', '', '', '', '' from <SID>.<OWNER_SCHEMA>.RSQTOBJ where OBJVERS = 'A'
