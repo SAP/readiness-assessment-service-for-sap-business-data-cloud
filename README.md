@@ -8,7 +8,7 @@ SAP BDC Assessment program is a strategic program from SAP. The intention is to 
 
 ## Requirements and Setup
 
-*Insert a short description what is required to get your project running...*
+Customer will need a SAP solution in the following list: SAP BW HANA (7.x to BW4), SAP HANA, SAP BPC
 
 ## Support, Feedback, Contributing
 
