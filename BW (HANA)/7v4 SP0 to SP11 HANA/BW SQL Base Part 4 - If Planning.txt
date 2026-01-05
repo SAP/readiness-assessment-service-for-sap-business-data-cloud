@@ -1,0 +1,5 @@
+select 'BPCA' as TLOGO, INFOCUBE as OBJECT, 'A', APPSET_ID, APPLICATION_ID, MULTIPROV, BEXVCUBE, '', '' from "UJA_APPL"
+union
+select 'BPCE' as TLOGO, b.INFOPROV as OBJECT, a.OBJVERS, a.APPSET_ID, a.APPL_ID, b.INFOAREA, '', '', '' from "RSBPCA_APPL" a
+left outer join "RSBPCA_APPL_IPRV" b
+on a.APPSET_ID = b.APPSET_ID and a.APPL_ID = b.APPL_ID where a.OBJVERS = 'A' and b.OBJVERS = 'A'
