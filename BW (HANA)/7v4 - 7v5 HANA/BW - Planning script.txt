@@ -1,3 +1,4 @@
+WITH BPC_DATA AS (
 select 'BPC_STD_ENV' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , INFOAREA , '' as MODEL , '' as INFOCUBE , '' as DIMENSION ,  '' as MULTIPROV,  '' AS BEX_SEC, '' AS SRV_TYPE, '' as PER_YTD , ''  from "UJA_APPSET_INFO"
 union
 select 'BPC_STD_APP' as TLOGO , APPSET_ID as ENVIRONMENT ,  'A' , '' as INFOAREA , APPLICATION_ID as MODEL , INFOCUBE , '' as DIMENSION ,  MULTIPROV ,  BEXVCUBE ,  APPLICATION_TYPE ,  STORAGE_TYPE , ''  from "UJA_APPL"
@@ -78,3 +79,12 @@ select 'BPC_EMB_BDAP' as TLOGO , '' as ENVIRONMENT ,  'A' ,  PROFILE_ID , '' as 
 union
 select distinct 'BPC_EMB_QUE' as TLOGO, '' as ENVIRONMENT ,  'A' , '' as INFOAREA , '' as MODEL , INFOCUBE, '' as DIMENSION , to_char(count(COMPID)) ,  '' , '' , '' , ''  from RSRREPDIR where objvers = 'A' and IS_PLANQUERY = 'X'
 group by INFOCUBE
+)
+
+SELECT '--- CHECK ---' AS TLOGO, 'NUMBER OF LINE RETRIEVED : ' || (SELECT COUNT(*) FROM BPC_DATA) AS ENVIRONMENT, 'INFO' AS A, '' AS INFOAREA, '' AS MODEL, '' AS INFOCUBE, '' AS DIMENSION, '' AS MULTIPROV, '' AS BEX_SEC, '' AS SRV_TYPE, '' AS PER_YTD, '' FROM DUMMY
+UNION ALL
+SELECT '--- CHECK ---', 'PLEASE CHECK LAST LINE: IT HAS TO BE "--- END ---", IF NOT, INCREASE MAX ROWS', '', '', '', '', '', '', '', '', '', '' FROM DUMMY
+UNION ALL
+SELECT * FROM BPC_DATA
+UNION ALL
+SELECT '--- END ---', 'ALL DATA EXTRACTED (OK)', '', '', '', '', '', '', '', '', '', '' FROM DUMMY;

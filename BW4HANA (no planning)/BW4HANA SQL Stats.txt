@@ -1,4 +1,5 @@
-select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, max(STARTTIME) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
+WITH BASE_DATA AS (
+select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, CAST(max(STARTTIME) as varchar) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
 union
 select 'RSMDATASTATE', INFOCUBE, CAST(max(TMSTMP_QUALOK) as varchar), '', '' from "RSMDATASTATE" group by INFOCUBE
 union
@@ -24,9 +25,9 @@ select 'RSSELDONE', OLTPSOURCE, CAST(max(SELDATE) as varchar), LOGSYS, '' from "
 union
 select 'RSSELDONE1', LOGSYS, CAST(max(SELDATE) as varchar), '', '' from "RSSELDONE" group by LOGSYS
 union
-select 'RSLDPIO', OLTPSOURCE, CAST(max(TIMESTAMP) as varchar), LOGSYS, '' from "RSLDPIO" group by OLTPSOURCE, LOGSYS 
+select 'RSLDPIO', OLTPSOURCE, CAST(max(TIMESTAMP) as varchar), LOGSYS, '' from "RSLDPIO" group by OLTPSOURCE, LOGSYS
 union
-select 'RSLDPIO1', LOGSYS, CAST(max(TIMESTAMP) as varchar), '', '' from "RSLDPIO" group by LOGSYS 
+select 'RSLDPIO1', LOGSYS, CAST(max(TIMESTAMP) as varchar), '', '' from "RSLDPIO" group by LOGSYS
 union
 select 'RSREQDONE', LOGDPID, CAST(max(DATUM) as varchar), '', '' from "RSREQDONE" group by LOGDPID
 union
@@ -53,9 +54,21 @@ union
 select 'RSPMPROCESS2', target, max(max_time), '', ''
 from
 (
-    select trim(SUBSTR_AFTER(SRC,'  ')) as target, max_time,  '' from "RSBKDTP"
+    select trim(SUBSTR_AFTER(SRC,'  ')) as target, max_time, '' from "RSBKDTP"
     left outer join
     ( select PROCESS_ID, max(PROCESS_TSN) as max_time from "RSPMPROCESS" group by PROCESS_ID, PROCESS_TYPE HAVING PROCESS_TYPE = 'DTP_LOAD')
     as A on DTP = PROCESS_ID
     where OBJVERS = 'A' and SRCTP = 'DTASRC'
 ) group by target
+),
+STATS AS (
+    SELECT COUNT(*) AS TOTAL_REEL FROM BASE_DATA
+)
+
+SELECT '--- CHECK ---' AS TABLE, 'NUMBER OF LINE RETRIEVED : ' || TOTAL_REEL AS KEY, 'INFO' AS DATE, '' AS COL1, '' AS COL2 FROM STATS
+UNION ALL
+SELECT '--- CHECK ---', 'PLEASE CHECK LAST LINE: IT HAS TO BE "--- END ---", IF NOT, INCREASE MAX ROWS', '', '', '' FROM DUMMY
+UNION ALL
+SELECT * FROM BASE_DATA
+UNION ALL
+SELECT '--- END ---', 'ALL DATA EXTRACTED (OK)', '', '', '' FROM DUMMY;

@@ -1,4 +1,4 @@
-select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, max(STARTTIME) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
+select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, CAST(max(STARTTIME) as varchar) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
 union
 select 'RSANT_PROCESSR', PROCESS, CAST(max(START_TIME) as varchar), '', '' from "RSANT_PROCESSR" group by PROCESS
 union

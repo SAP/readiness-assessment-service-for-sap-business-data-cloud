@@ -1,4 +1,5 @@
-select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, max(STARTTIME) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
+WITH BASE_DATA AS (
+select 'RSDDSTAT_OLAP' as TABLE, OBJNAME as KEY, CAST(max(STARTTIME) as varchar) as DATE, '' as COL1, '' as COL2 from "RSDDSTAT_OLAP" group by OBJNAME
 union
 select 'RSANT_PROCESSR', PROCESS, CAST(max(START_TIME) as varchar), '', '' from "RSANT_PROCESSR" group by PROCESS
 union
@@ -39,3 +40,15 @@ union
 select 'RSRREPDIR', INFOCUBE, CAST(max(GENTIME) as varchar) as GENTIME, '', '' from "RSRREPDIR" group by INFOCUBE
 union
 select 'V_REP_JOIN', INFOCUBE, CAST(max(LASTUSED) as varchar), '', '' from "V_REP_JOIN" group by INFOCUBE
+),
+STATS AS (
+    SELECT COUNT(*) AS TOTAL_REEL FROM BASE_DATA
+)
+
+SELECT '--- CHECK ---' AS TABLE, 'NUMBER OF LINE RETRIEVED : ' || TOTAL_REEL AS KEY, 'INFO' AS DATE, '' AS COL1, '' AS COL2 FROM STATS
+UNION ALL
+SELECT '--- CHECK ---', 'PLEASE CHECK LAST LINE: IT HAS TO BE "--- END ---", IF NOT, INCREASE MAX ROWS', '', '', '' FROM DUMMY
+UNION ALL
+SELECT * FROM BASE_DATA
+UNION ALL
+SELECT '--- END ---', 'ALL DATA EXTRACTED (OK)', '', '', '' FROM DUMMY;
