@@ -41,6 +41,8 @@ select 'FBPA' as TLOGO, FBPNAME, OBJVERS, '', '', '', '', '', '' from "RSFBP" wh
 union
 select 'CALC' as TLOGO, OBJNM, OBJVERS, NAMESPACE, OBJECT_NAME, '', '', '', '' from "RSOOBJXREF_HANA" where OBJVERS = 'A'
 union
+select 'CESC' as TLOGO, SUBSTR_AFTER(SCENARIO_NAME, '/') as OBJECT, SUBSTR_AFTER(SUBSTR_BEFORE(SCENARIO_NAME, '/'), ':') as OBJVERS, to_nvarchar(MEMORY_SIZE) as ATTRIBUTE1, to_nvarchar(CREATE_TIME) as ATTRIBUTE2, IS_PERSISTENT as ATTRIBUTE3, COMPONENT as ATTRIBUTE4, '' as ATTRIBUTE5, '' as ATTRIBUTE6 from M_CE_CALCSCENARIOS_OVERVIEW where SCENARIO_NAME LIKE '_SYS_BIC%'
+union
 select 'HAAP' as TLOGO, HAAPNM as OBJECT, OBJVERS, INFOAREA, '', '', '', '', '' from "RSDHAMAP" where OBJVERS = 'A'and ORIGIN_TYPE = ''
 union
 select 'RSDS' as TLOGO, DATASOURCE, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSDS" where OBJVERS = 'A'
@@ -51,9 +53,7 @@ select 'DTPA' as TLOGO, DTP as OBJECT, OBJVERS, DTPTYPE, SRCTLOGO, SRC, TGTTLOGO
 union
 select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
 union
-select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, STARTROUTINE || '|' || ENDROUTINE || '|' || EXPERT , '' from "RSTRAN" where OBJVERS = 'A'
-union
-select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
+select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, NVL(STARTROUTINE,'') || '|' || NVL(ENDROUTINE,'') || '|' || NVL(EXPERT,'') , '' from "RSTRAN" where OBJVERS = 'A'
 union
 select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, OLTPSOURCE, LOGSYS, '', '', '', '' from "RSLDPIO" where OBJVERS = 'A'
 union

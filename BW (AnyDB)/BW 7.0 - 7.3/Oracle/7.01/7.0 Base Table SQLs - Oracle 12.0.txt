@@ -32,9 +32,7 @@ select 'DTPA' as TLOGO, DTP as OBJECT, OBJVERS, DTPTYPE, TGTTLOGO, SRC, TGT, SRC
 union
 select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
 union
-select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, STARTROUTINE from "RSTRAN" where OBJVERS = 'A'
-union
-select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
+select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, NVL(STARTROUTINE,'') || '|' || NVL(ENDROUTINE,'') || '|' || NVL(EXPERT,'') from "RSTRAN" where OBJVERS = 'A'
 union
 select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, OLTPSOURCE, LOGSYS, '', '', '' from "RSLDPIO" where OBJVERS = 'A'
 union
@@ -89,5 +87,9 @@ and OBJVERS = 'A' and (TLOGO_DEP != 'IOBJ' and TLOGO_DEP != 'AREA') and ASC_TYPE
 union
 Select 'DTIT' as TLOGO, INFOSET, '', TNAME, '', '', '', ''
 from "RSQTOBJ" where OBJVERS = 'A'
+union
+select 'CBEX' as TLOGO, TO_CHAR(count(*)), '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '3200' and STEPTP = 'BEX'
+union
+select 'CBRD' as TLOGO, TO_CHAR(count(*)), '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '14601' OR EVENTID = '14611' OR EVENTID = '14671'
 
 

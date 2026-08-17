@@ -34,8 +34,6 @@ select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from 
 union
 select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, STARTROUTINE || '|' || ENDROUTINE || '|' || EXPERT , '' from "RSTRAN" where OBJVERS = 'A'
 union
-select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
-union
 select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, OLTPSOURCE, LOGSYS, '', '', '', '' from "RSLDPIO" where OBJVERS = 'A'
 union
 select 'LSYS' as TLOGO, SLOGSYS as OBJECT, OBJSTAT, RLOGSYS, SRCTYPE, SAPREL, SBWBCRL, RBWBCRL, '' from "RSBASIDOC" where OBJSTAT = 'ACT'
@@ -94,3 +92,7 @@ Select 'DTHC' as TLOGO, OBJNM, '', OBJNM_DEP, TLOGO_DEP, '', '', '', '' from "RS
 and OBJVERS = 'A' and (TLOGO_DEP != 'IOBJ' and TLOGO_DEP != 'AREA') and ASC_TYPE = '002'
 union
 Select 'DTIT' as TLOGO, INFOSET, '', TNAME, '', '', '', '', '' from "RSQTOBJ" where OBJVERS = 'A'
+union
+select 'CBEX' as TLOGO, CAST(count(*) as varchar(20)), '', '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '3200' and STEPTP = 'BEX'
+union
+select 'CBRD' as TLOGO, CAST(count(*) as varchar(20)), '', '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '14601' OR EVENTID = '14611' OR EVENTID = '14671'
