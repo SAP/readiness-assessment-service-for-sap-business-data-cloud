@@ -41,9 +41,7 @@ select 'DTPA' as TLOGO, DTP as OBJECT, OBJVERS, DTPTYPE, TGTTLOGO, SRC, TGT, '',
 union
 select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
 union
-select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, '', '', '', '' from "RSTRAN" where OBJVERS = 'A'
-union
-select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
+select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, NVL(STARTROUTINE,'') || '|' || NVL(ENDROUTINE,'') || '|' || NVL(EXPERT,'') , '' from "RSTRAN" where OBJVERS = 'A'
 union
 select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLDPIO" where OBJVERS = 'A'
 union

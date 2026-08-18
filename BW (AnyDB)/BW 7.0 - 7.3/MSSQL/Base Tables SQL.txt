@@ -26,10 +26,6 @@ select 'ALVL' as TLOGO, AGGRLEVEL, OBJVERS, INFOPROV, '', '', '', '', '' from "R
 union
 select 'ARCH' as TLOGO, DAPNAME, OBJVERS, TLOGO, OBJNM, ARCHMODE, '', '', '' from "RSDADAP" where OBJVERS = 'A'
 union
-select 'AINX' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from "RSLTIP" where OBJVERS = 'A' and TLOGO = 'AINX'
-union
-select 'COPR' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from "RSLTIP" where OBJVERS = 'A' and TLOGO = 'COPR'
-union
 select 'RSDS' as TLOGO, DATASOURCE, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSDS" where OBJVERS = 'A'
 union
 select 'ISFS' as TLOGO, OLTPSOURCE as OBJECT, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSOLTPSOURCE" where OBJVERS = 'A'
@@ -38,9 +34,7 @@ select 'DTPA' as TLOGO, DTP as OBJECT, OBJVERS, DTPTYPE, TGTTLOGO, SRC, TGT, '',
 union
 select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
 union
-select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, '', '', '', '' from "RSTRAN" where OBJVERS = 'A'
-union
-select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
+select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, ISNULL(STARTROUTINE,'') + '|' + ISNULL(ENDROUTINE,'') + '|' + ISNULL(EXPERT,'') , '' from "RSTRAN" where OBJVERS = 'A'
 union
 select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLDPIO" where OBJVERS = 'A'
 union
@@ -90,8 +84,24 @@ select 'XCLS' as TLOGO, TECHNAME as OBJECT, OBJVERS, '', '', '', '', '', '' from
 union
 select 'CVER' as TLOGO, COMPONENT as OBJECT, '', RELEASE, EXTRELEASE, COMP_TYPE, '', '', '' from "CVERS"
 union
+select 'SIZE' as TLOGO, NAMESPACE as OBJECT, '', NSPACEGEN, '', '', '', '', '' from "RSPSPACE"
+union
+select 'RSTO' as TLOGO, ODSNAME as OBJECT, '', ODSNAME_TECH, USERAPP, USEROBJ, '', '', '' from "RSTSODS" where "USEROBJ" = ''
+union
 select 'DAMT' as TLOGO, a.SLOGSYS, '', a.RLOGSYS, '', '', '', '', '' from "RSBASIDOC" a
 left outer join "T000" b
 on a.SLOGSYS = b.LOGSYS
 where b.LOGSYS <> '' and a.OBJSTAT = 'ACT'
+union
+select 'DTMP' as TLOGO, INFOCUBE, '', PARTCUBE, '', '', '', '', '' from "RSDCUBEMULTI"
+where OBJVERS = 'A'
+union
+Select 'DTHC' as TLOGO, OBJNM, '', OBJNM_DEP, TLOGO_DEP, '', '', '', '' from "RSOOBJXREF" where TLOGO = 'HCPR'
+and OBJVERS = 'A' and (TLOGO_DEP != 'IOBJ' and TLOGO_DEP != 'AREA') and ASC_TYPE = '002'
+union
+Select 'DTIT' as TLOGO, INFOSET, '', TNAME, '', '', '', '', '' from "RSQTOBJ" where OBJVERS = 'A'
+union
+select 'CBEX' as TLOGO, CAST(count(*) as varchar), '', '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '3200' and STEPTP = 'BEX'
+union
+select 'CBRD' as TLOGO, CAST(count(*) as varchar), '', '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '14601' OR EVENTID = '14611' OR EVENTID = '14671'
 

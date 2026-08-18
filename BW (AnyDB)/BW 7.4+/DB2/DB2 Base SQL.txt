@@ -1,5 +1,3 @@
-select 'ADSO' as TLOGO, ADSONM as OBJECT, OBJVERS, PLANNING_MODE as ATTRIBUTE1, HANAMODELFL as ATTRIBUTE2, DIRECT_UPDATE as ATTRIBUTE3, NCUMTIM as ATTRIBUTE4, '' as ATTRIBUTE5, '' as ATTRIBUTE6 from "RSOADSO" where OBJVERS = 'A'
-union
 select 'ODSO' as TLOGO, ODSOBJECT, OBJVERS, PLANNING_MODE, ODSOTYPE, IMOFL, HANAMODELFL, NCUMTIM, '' from "RSDODSO" where OBJVERS = 'A'
 union
 select 'CUBE' as TLOGO, INFOCUBE, OBJVERS, CUBETYPE, CUBESUBTYPE, TRANSACT, HANAMODELFL, NCUMTIM, INFOAREA from "RSDCUBE" where OBJVERS = 'A' and CUBETYPE = 'B'
@@ -28,18 +26,6 @@ select 'ALVL' as TLOGO, AGGRLEVEL, OBJVERS, INFOPROV, '', '', '', '', '' from "R
 union
 select 'ARCH' as TLOGO, DAPNAME, OBJVERS, TLOGO, OBJNM, ARCHMODE, '', '', '' from "RSDADAP" where OBJVERS = 'A'
 union
-select 'AINX' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from "RSLTIP" where OBJVERS = 'A' and TLOGO = 'AINX'
-union
-select 'COPR' as TLOGO, OBJNM, OBJVERS, '', '', '', '', '', '' from "RSLTIP" where OBJVERS = 'A' and TLOGO = 'COPR'
-union
-select 'HCPR' as TLOGO, HCPRNM, OBJVERS, HANAMODELFL, '', '', '', '', INFOAREA from "RSOHCPR" where OBJVERS = 'A'
-union
-select 'FBPA' as TLOGO, FBPNAME, OBJVERS, '', '', '', '', '', '' from "RSFBP" where OBJVERS = 'A'
-union
-select 'CALC' as TLOGO, OBJNM, OBJVERS, NAMESPACE, OBJECT_NAME, '', '', '', '' from "RSOOBJXREF_HANA" where OBJVERS = 'A'
-union
-select 'HAAP' as TLOGO, HAAPNM as OBJECT, OBJVERS, INFOAREA, '', '', '', '', '' from "RSDHAMAP" where OBJVERS = 'A'and ORIGIN_TYPE = ''
-union
 select 'RSDS' as TLOGO, DATASOURCE, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSDS" where OBJVERS = 'A'
 union
 select 'ISFS' as TLOGO, OLTPSOURCE as OBJECT, OBJVERS, LOGSYS, TYPE, '', '', '', '' from "RSOLTPSOURCE" where OBJVERS = 'A'
@@ -49,8 +35,6 @@ union
 select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
 union
 select 'TRFN' as TLOGO, TRANID as OBJECT, OBJVERS, SOURCETYPE, SOURCENAME, TARGETTYPE, TARGETNAME, STARTROUTINE || '|' || ENDROUTINE || '|' || EXPERT , '' from "RSTRAN" where OBJVERS = 'A'
-union
-select 'ISIG' as TLOGO, LOGGRID as OBJECT, OBJVERS, '', '', '', '', '', '' from "RSLGRHIE" where OBJVERS = 'A'
 union
 select 'ISIP' as TLOGO, LOGDPID as OBJECT, OBJVERS, OLTPSOURCE, LOGSYS, '', '', '', '' from "RSLDPIO" where OBJVERS = 'A'
 union
@@ -122,3 +106,7 @@ Select 'DTHC' as TLOGO, OBJNM, '', OBJNM_DEP, TLOGO_DEP, '', '', '', '' from "RS
 and OBJVERS = 'A' and (TLOGO_DEP != 'IOBJ' and TLOGO_DEP != 'AREA') and ASC_TYPE = '002'
 union
 Select 'DTIT' as TLOGO, INFOSET, '', TNAME, '', '', '', '', '' from "RSQTOBJ" where OBJVERS = 'A'
+union
+select 'CBEX' as TLOGO, CAST(count(*) as varchar(20)), '', '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '3200' and STEPTP = 'BEX'
+union
+select 'CBRD' as TLOGO, CAST(count(*) as varchar(20)), '', '', '', '', '', '', '' from "RSDDSTAT_OLAP" where EVENTID = '14601' OR EVENTID = '14611' OR EVENTID = '14671'
